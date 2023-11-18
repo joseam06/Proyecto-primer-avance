@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 16-11-2023 a las 04:20:18
+-- Tiempo de generación: 18-11-2023 a las 02:37:54
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -68,22 +68,22 @@ DELIMITER ;
 
 CREATE TABLE `categoria` (
   `id_categoria` int(11) NOT NULL,
-  `id_producto` int(11) NOT NULL,
-  `nombre_categoria` varchar(50) NOT NULL
+  `nombre_categoria` varchar(50) NOT NULL,
+  `id_producto` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `categoria`
 --
 
-INSERT INTO `categoria` (`id_categoria`, `id_producto`, `nombre_categoria`) VALUES
-(11, 1, 'Android'),
-(22, 2, 'Android'),
-(33, 3, 'Iphone'),
-(44, 4, 'Android'),
-(55, 5, 'Android'),
-(66, 6, 'Android'),
-(77, 7, 'Android');
+INSERT INTO `categoria` (`id_categoria`, `nombre_categoria`, `id_producto`) VALUES
+(11, 'Android', 1),
+(22, 'Android', 2),
+(33, 'Iphone', 3),
+(44, 'Android', 4),
+(55, 'Android', 5),
+(66, 'Android', 6),
+(77, 'Android', 7);
 
 -- --------------------------------------------------------
 
@@ -92,6 +92,7 @@ INSERT INTO `categoria` (`id_categoria`, `id_producto`, `nombre_categoria`) VALU
 --
 
 CREATE TABLE `detalles_compra` (
+  `id_detallles_compra` int(11) NOT NULL,
   `nombre_usuario` varchar(50) NOT NULL,
   `id_producto` int(11) NOT NULL,
   `cantidad` int(11) NOT NULL,
@@ -102,14 +103,14 @@ CREATE TABLE `detalles_compra` (
 -- Volcado de datos para la tabla `detalles_compra`
 --
 
-INSERT INTO `detalles_compra` (`nombre_usuario`, `id_producto`, `cantidad`, `precio_total`) VALUES
-('juanp1', 1, 1, 900000),
-('luisf2', 2, 3, 7800000),
-('josem3', 3, 2, 7000000),
-('miguel4', 4, 1, 1600000),
-('fernando5', 5, 4, 3000000),
-('andres6', 6, 2, 3400000),
-('diomedes', 7, 1, 800000);
+INSERT INTO `detalles_compra` (`id_detallles_compra`, `nombre_usuario`, `id_producto`, `cantidad`, `precio_total`) VALUES
+(1, 'juanp1', 1, 1, 900000),
+(2, 'luisf2', 2, 3, 7800000),
+(3, 'josem3', 3, 2, 7000000),
+(4, 'miguel4', 4, 1, 1600000),
+(5, 'fernando5', 5, 4, 3000000),
+(6, 'andres6', 6, 2, 3400000),
+(7, 'diomedes', 7, 1, 800000);
 
 -- --------------------------------------------------------
 
@@ -118,6 +119,7 @@ INSERT INTO `detalles_compra` (`nombre_usuario`, `id_producto`, `cantidad`, `pre
 --
 
 CREATE TABLE `orden_compra` (
+  `id_orden_compra` int(11) NOT NULL,
   `nombre_usuario` varchar(50) NOT NULL,
   `id_producto` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -126,14 +128,14 @@ CREATE TABLE `orden_compra` (
 -- Volcado de datos para la tabla `orden_compra`
 --
 
-INSERT INTO `orden_compra` (`nombre_usuario`, `id_producto`) VALUES
-('juanp1', 1),
-('luisf2', 2),
-('josem3', 3),
-('miguel4', 4),
-('fernando5', 5),
-('andres6', 6),
-('diomedes', 7);
+INSERT INTO `orden_compra` (`id_orden_compra`, `nombre_usuario`, `id_producto`) VALUES
+(1, 'juanp1', 1),
+(2, 'luisf2', 2),
+(3, 'josem3', 3),
+(4, 'miguel4', 4),
+(5, 'fernando5', 5),
+(6, 'andres6', 6),
+(7, 'diomedes', 7);
 
 --
 -- Disparadores `orden_compra`
@@ -225,12 +227,14 @@ DELIMITER ;
 -- Indices de la tabla `categoria`
 --
 ALTER TABLE `categoria`
+  ADD PRIMARY KEY (`id_categoria`),
   ADD KEY `id_producto` (`id_producto`);
 
 --
 -- Indices de la tabla `detalles_compra`
 --
 ALTER TABLE `detalles_compra`
+  ADD PRIMARY KEY (`id_detallles_compra`),
   ADD KEY `nombre_usuario` (`nombre_usuario`),
   ADD KEY `id_producto` (`id_producto`);
 
@@ -238,6 +242,7 @@ ALTER TABLE `detalles_compra`
 -- Indices de la tabla `orden_compra`
 --
 ALTER TABLE `orden_compra`
+  ADD PRIMARY KEY (`id_orden_compra`),
   ADD KEY `nombre_usuario` (`nombre_usuario`),
   ADD KEY `id_producto` (`id_producto`);
 
@@ -256,6 +261,18 @@ ALTER TABLE `usuarios`
 --
 -- AUTO_INCREMENT de las tablas volcadas
 --
+
+--
+-- AUTO_INCREMENT de la tabla `detalles_compra`
+--
+ALTER TABLE `detalles_compra`
+  MODIFY `id_detallles_compra` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT de la tabla `orden_compra`
+--
+ALTER TABLE `orden_compra`
+  MODIFY `id_orden_compra` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de la tabla `productos`
